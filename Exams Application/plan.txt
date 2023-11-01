@@ -1,0 +1,47 @@
+﻿api controller => crudRepo=> EF Db => WPF / wwwroot (React?) JS
+MVC
+
+
+crud operations:
+
+admin:
+public User? GetAccountById(int id()?{}
+public List<User> getAllAcounts(){}
+public bool deleteAccount(int userId){}
+public User createAccount(User user){}
+
+account:
+public User createAccount(User user){}
+public User updateAccountDetails(int userId){}
+public bool deleteAccount(int userId){}
+public User login(string username, string password){}
+public bool logout(int userId){}
+
+teacher:
+public Exam createExam(Exam exam){}
+public List<Exam> getAllExams(int teacherId){}
+public Exam updateExam(int examId){}
+public bool deleteExam(int examId){}
+public Question createQuestion(Question question){}
+public List<Question> getAllQuestion(int examId){}
+public Question updateQuestion(int questionId){}
+public bool deleteQuestion(int questionId){}
+public StudentExam gradeExamPerStudent(int studentExamId){}
+------------------------
+public Exam SaveLocalyUntilServerUpload(Exam exam){}// save to local storage on client side untill:
+public Exam UploadExamToServer(){} ajax POST request to server side with CreateExam() 
+//change UpdateExam() that can only if no student logged in to exam
+(public Exam GetExamStatistic(){}/) public double GetExamGradeStatistic(){}
+
+
+student:
+public string loginToExam(int examId){}
+public bool submitExam(int examId){}
+public List<StudentExam> getAllExamsTaken(int studentId){}
+//student gets exam, submits exam to teacher with studentId, teacher updates grade in student db, student can get grade
+------------------------
+public Exam GetExamById(){}
+//change LoginToExam() that can only according to DateTime
+
+
+
