@@ -1,3 +1,4 @@
+using Exams_Application.Interfaces;
 using Exams_Application.Repositories;
 
 namespace Exams_Application

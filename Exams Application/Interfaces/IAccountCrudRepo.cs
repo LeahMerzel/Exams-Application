@@ -1,6 +1,6 @@
 ﻿using Exams_Application.Models;
 
-namespace Exams_Application.Repositories
+namespace Exams_Application.Interfaces
 {
     public interface IAccountCrudRepo
     {

@@ -1,4 +1,5 @@
-﻿using Exams_Application.Models;
+﻿using Exams_Application.Interfaces;
+using Exams_Application.Models;
 
 namespace Exams_Application.Repositories
 {
