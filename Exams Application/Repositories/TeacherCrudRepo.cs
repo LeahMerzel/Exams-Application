@@ -1,6 +1,7 @@
 ﻿using Exams_Application.Interfaces;
 using Exams_Application.Models;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Exams_Application.Repositories
 {
@@ -136,22 +137,31 @@ namespace Exams_Application.Repositories
         }
         public int GradeExamPerStudent(Exam studentExam)
         {
-            int grade = 0;//to change according to ui?
-            using (var db = new ExamsDbContext())//how to use without סוגריים and why
+            int grade = 0;//to change according to input from client?
+            using (var db = new ExamsDbContext())
             {
                 var student = db.Students.SingleOrDefault(s => s.Id == studentExam.StudentId);
                 if (student != null)
                 {
                     studentExam.Grade = grade;
                     student.AllExamsTaken.Add(studentExam);//does this add info of grade to student Db?
+                    var teacher = db.Teachers.SingleOrDefault(t => t.Id == studentExam.TeacherId);
+                    if (teacher != null)
+                      //  teacher.Grades.Add(grade);
                     db.SaveChanges();
                 }
             };
             return grade;
         }
-       /* public double GetExamGradeStatistic()
+        public double? GetExamGradeStatistic(int examId)
         {
-            
-        }*/
+            using (var db = new ExamsDbContext())
+            {
+                var grades = db.Exams.Where(e=> e.ExamId == examId).Select(e=> e.Grade);
+                if (grades != null)
+                    return grades.Average();//do i need {} here
+                return null;
+            };
+        }
     }
 }

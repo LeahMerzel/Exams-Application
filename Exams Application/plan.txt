@@ -27,20 +27,20 @@ public List<Question> getAllQuestion(int examId){}
 public Question updateQuestion(int questionId){}
 public bool deleteQuestion(int questionId){}
 public StudentExam gradeExamPerStudent(int studentExamId){}
+(public Exam GetExamStatistic(){}/) public double GetExamGradeStatistic(){}
 ------------------------
 public Exam SaveLocalyUntilServerUpload(Exam exam){}// save to local storage on client side untill:
 public Exam UploadExamToServer(){} ajax POST request to server side with CreateExam() 
 //change UpdateExam() that can only if no student logged in to exam
-(public Exam GetExamStatistic(){}/) public double GetExamGradeStatistic(){}
 
 
 student:
+public Exam GetExamById(){}
 public string loginToExam(int examId){}
 public bool submitExam(int examId){}
 public List<StudentExam> getAllExamsTaken(int studentId){}
 //student gets exam, submits exam to teacher with studentId, teacher updates grade in student db, student can get grade
 ------------------------
-public Exam GetExamById(){}
 //change LoginToExam() that can only according to DateTime
 
 

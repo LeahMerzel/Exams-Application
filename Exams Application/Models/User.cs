@@ -13,18 +13,6 @@ namespace Exams_Application.Models
         public bool IsAdmin { get; set; }
         public string? FullName { get; set; }
 
-        public User() 
-        {
-        }
-
-        protected User(int id, string? userName, string? password, string? phoneNum, bool isAdmin, string? fullName)
-        {
-            Id = id;
-            UserName = userName;
-            Password = password;
-            PhoneNum = phoneNum;
-            IsAdmin = isAdmin;
-            FullName = fullName;
-        }
+       
     }
 }

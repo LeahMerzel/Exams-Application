@@ -5,6 +5,8 @@ namespace Exams_Application.Repositories
 {
     public class StudentCrudRepo : IStudentCrudRepo
     {
+       // public Exam GetExamById() { }
+
         public Exam? LoginToExam(int examId)
         {
             using ExamsDbContext db = new ExamsDbContext();
