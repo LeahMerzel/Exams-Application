@@ -178,6 +178,9 @@ namespace Exams_Application.Migrations
                     b.Property<float>("GradeAvg")
                         .HasColumnType("real");
 
+                    b.Property<int>("StudentsTeacherId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("TeacherId")
                         .HasColumnType("int");
 

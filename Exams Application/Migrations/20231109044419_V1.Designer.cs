@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Exams_Application.Migrations
 {
     [DbContext(typeof(ExamsDbContext))]
-    [Migration("20231105093506_V8")]
-    partial class V8
+    [Migration("20231109044419_V1")]
+    partial class V1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -180,6 +180,9 @@ namespace Exams_Application.Migrations
 
                     b.Property<float>("GradeAvg")
                         .HasColumnType("real");
+
+                    b.Property<int>("StudentsTeacherId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("TeacherId")
                         .HasColumnType("int");

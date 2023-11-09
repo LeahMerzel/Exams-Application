@@ -7,6 +7,15 @@ namespace Exams_Application.Repositories
 {
     public class TeacherCrudRepo : ITeacherCrudRepo
     {
+        public Exam? GetExamById(int examId)
+        {
+            using var db = new ExamsDbContext();
+            var exam = db.Exams.SingleOrDefault(e=> e.ExamId == examId);
+            if (exam == null)
+                return exam;
+            return null;
+            
+        }
         public Exam? CreateExam(Exam exam)
         {
             using ExamsDbContext db = new ExamsDbContext();
@@ -157,9 +166,9 @@ namespace Exams_Application.Repositories
         {
             using (var db = new ExamsDbContext())
             {
-                var grades = db.Exams.Where(e=> e.ExamId == examId).Select(e=> e.Grade);
-                if (grades != null)
-                    return grades.Average();//do i need {} here
+                var gradesList = db.Exams.Where(e=> e.ExamId == examId).Select(e=> e.Grade);
+                if (gradesList.Any())
+                    return gradesList.Average();
                 return null;
             };
         }

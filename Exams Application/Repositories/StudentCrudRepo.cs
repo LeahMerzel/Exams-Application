@@ -5,7 +5,24 @@ namespace Exams_Application.Repositories
 {
     public class StudentCrudRepo : IStudentCrudRepo
     {
-       // public Exam GetExamById() { }
+        public List<Exam>? GetAllExamsToDo(int studentsTeacherId)
+        {
+            using var db = new ExamsDbContext();
+            var examsListToDo = db.Exams.Where(e => e.TeacherId == studentsTeacherId).ToList();
+            if (examsListToDo.Any() )
+                return examsListToDo;
+            return null;
+
+        }
+        public Exam? GetExamToDoById(int ExamId) 
+        {
+            using var db = new ExamsDbContext();
+            var exam = db.Exams.SingleOrDefault(e=> e.ExamId == ExamId);
+            if (exam == null)
+                return exam;
+            return null;
+            
+        }
 
         public Exam? LoginToExam(int examId)
         {
