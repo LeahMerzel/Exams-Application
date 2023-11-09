@@ -16,8 +16,7 @@ namespace Exams_Application.Models
         public List<Question> ExamQuestions { get; set; } 
         public int StudentId { get; set; }
         public int Grade { get; set; }
-      /*  [Key]
-        public List<int> Grades { get; set; }*/
+     
 
     }
 }
