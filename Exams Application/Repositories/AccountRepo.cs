@@ -8,8 +8,9 @@ using Exams_Application.Interfaces;
 
 namespace Exams_Application.Repositories
 {
-    public class AccountCrudRepo : IAccountCrudRepo
+    public class AccountRepo : IAccountCrudRepo
     {
+        //לייצר פה קונסטרקטור שבתוכו dbcontext
         //when and do i use this?:
         /*        private static CategoriesRepositorty Instance = null;
                 private CategoriesRepositorty() { }

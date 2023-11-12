@@ -1,5 +1,7 @@
 using Exams_Application.Interfaces;
+using Exams_Application.Models;
 using Exams_Application.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Exams_Application
 {
@@ -20,14 +22,10 @@ namespace Exams_Application
                 c.IgnoreObsoleteProperties();
                 c.CustomSchemaIds(type => type.FullName);
             });
-            //do i need to do thid to use multiple controllers?:
-            //builder.Services.AddControllers();
-
-            //is singleton appropriate here? 
-            builder.Services.AddSingleton<IAccountCrudRepo, AccountCrudRepo>();
-            builder.Services.AddSingleton<IAdminCrudRepo, AdminCrudRepo>();
-            builder.Services.AddSingleton<IStudentCrudRepo, StudentCrudRepo>();
-            builder.Services.AddSingleton<ITeacherCrudRepo, TeacherCrudRepo>();
+           
+            //is this in the right place on the page?
+            builder.Services.AddDbContext<ExamsDbContext>(options =>
+               options.UseSqlServer(builder.Configuration.GetConnectionString("project")));
 
             //what does this do?
             builder.Services.AddCors(options =>
@@ -52,7 +50,6 @@ namespace Exams_Application
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
             app.UseCors();

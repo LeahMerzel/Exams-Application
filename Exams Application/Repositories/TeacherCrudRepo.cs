@@ -1,5 +1,6 @@
 ﻿using Exams_Application.Interfaces;
 using Exams_Application.Models;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
@@ -64,8 +65,7 @@ namespace Exams_Application.Repositories
                     exam.ExamQuestions = examToUpdate.ExamQuestions;
                     exam.ExamDescription = examToUpdate.ExamDescription;
                     exam.ExamQuestions = examToUpdate.ExamQuestions.ToList();
-                    exam.StudentId = examToUpdate.StudentId;
-                    exam.Grade = examToUpdate.Grade;
+                    //finish updating
 
                     db.SaveChanges();
                     return examToUpdate;
@@ -147,7 +147,7 @@ namespace Exams_Application.Repositories
         public int GradeExamPerStudent(Exam studentExam)
         {
             int grade = 0;//to change according to input from client?
-            using (var db = new ExamsDbContext())
+           /* using (var db = new ExamsDbContext())
             {
                 var student = db.Students.SingleOrDefault(s => s.Id == studentExam.StudentId);
                 if (student != null)
@@ -155,22 +155,22 @@ namespace Exams_Application.Repositories
                     studentExam.Grade = grade;
                     student.AllExamsTaken.Add(studentExam);//does this add info of grade to student Db?
                     var teacher = db.Teachers.SingleOrDefault(t => t.Id == studentExam.TeacherId);
-                    if (teacher != null)
-                      //  teacher.Grades.Add(grade);
                     db.SaveChanges();
                 }
-            };
+            };*/
             return grade;
         }
-        public double? GetExamGradeStatistic(int examId)
+/*        public double? GetExamGradeStatistic(int examId)
         {
             using (var db = new ExamsDbContext())
             {
-                var gradesList = db.Exams.Where(e=> e.ExamId == examId).Select(e=> e.Grade);
+                //go with forign key
+                // להשתמש לא בID אלא במשהו אחר כמו תאריך
+                var gradesList = db.Exams.Where(e => e.ExamId == examId).Select(e => e.Grade);
                 if (gradesList.Any())
                     return gradesList.Average();
                 return null;
             };
         }
-    }
+*/    }
 }

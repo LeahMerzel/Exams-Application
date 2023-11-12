@@ -13,10 +13,10 @@ namespace Exams_Application.Models
         public bool IsOrderQuestionsRandom { get; set; }
         public int TeacherId { get; }
         public string ExamDescription { get; set; }
-        public List<Question> ExamQuestions { get; set; } 
-        public int StudentId { get; set; }
-        public int Grade { get; set; }
-     
+        public List<Question> ExamQuestions { get; set; }
+
+        //do i need this is it many to many, how to do?
+        //public List<Student> StudentsToDoExam { get; } = new();
 
     }
 }

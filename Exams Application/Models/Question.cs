@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Exams_Application.Models
 {
@@ -13,5 +14,6 @@ namespace Exams_Application.Models
         public List<Answer> Answers { get; set; }
         public bool IsOrderAnswersRandom { get; set; }
         public int QuestionScoring { get; set; }
+        public int ExamId { get; set; }
     }
 }

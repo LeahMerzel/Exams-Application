@@ -40,7 +40,7 @@ namespace Exams_Application.Repositories
         {
             using ExamsDbContext db = new ExamsDbContext();
             {
-                if (exam != null)
+                /*if (exam != null)
                 {
                     var teacherToRecieveExam = db.Teachers.SingleOrDefault(t => t.Id == exam.TeacherId);
                     if (teacherToRecieveExam != null)
@@ -51,7 +51,7 @@ namespace Exams_Application.Repositories
                         return "student "+ exam.StudentId +" submitted exam successfuly to teacher" + teacherToRecieveExam;
                     }
                     return "student " + exam.StudentId + " failed to submit exam";
-                }
+                }*/
                 return "no exam to submit";
             }
         }

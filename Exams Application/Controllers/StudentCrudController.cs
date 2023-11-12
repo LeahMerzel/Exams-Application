@@ -14,12 +14,13 @@ namespace Exams_Application.Controllers
         private readonly IStudentCrudRepo _studentReposetory;
         public StudentCrudController(IStudentCrudRepo studentReposetory)
         {
-            _studentReposetory = studentReposetory;
+            _studentReposetory = studentReposetory;//like this in re[po with dbcontext  לא חובה
         }
 
         // GET: api/<StudentCrudController>
         [HttpGet("GetAllExamsTaken-{id}")]
-        public List<Exam>? GetAllExamsTaken(int studentId)
+        public List<Exam>? GetAllExamsTaken(int studentId)//צריך ולידציות במקום ברפוזטוריז ולהחליף לiactionresult
+            //can get validated from repo and validate here
         {
             return _studentReposetory.GetAllExamsTaken(studentId);
         }
