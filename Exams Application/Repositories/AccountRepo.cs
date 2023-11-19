@@ -8,78 +8,66 @@ using Exams_Application.Interfaces;
 
 namespace Exams_Application.Repositories
 {
-    public class AccountRepo : IAccountCrudRepo
+    public class AccountRepo : IAccountRepo
     {
-        //לייצר פה קונסטרקטור שבתוכו dbcontext
-        //when and do i use this?:
-        /*        private static CategoriesRepositorty Instance = null;
-                private CategoriesRepositorty() { }
+        private readonly ExamsDbContext db;
 
-                public static CategoriesRepositorty GetInstance()
-                {
-                    if (Instance == null)
-                    {
-                        Instance = new CategoriesRepositorty();
-                    }
-                    return Instance;
-                }
-        */
+        public AccountRepo(ExamsDbContext dbContext)
+        {
+            db = dbContext;
+        }
         public User CreateAccount(User user)
         {
-            using (ExamsDbContext db = new ExamsDbContext())
-            {
-                db.Users.Add(user);
-                db.SaveChanges();
-                return user;
-            }
+
+            db.Users.Add(user);
+            db.SaveChanges();
+            return user;
+
         }
         //better bool or int? 
         public bool UpdateAccountDetails(User userUpdated)
         {
-            using (ExamsDbContext db = new ExamsDbContext())
+
+            var foundAccount = db.Users.SingleOrDefault(u => u.Id == userUpdated.Id);
+            if (foundAccount != null)
             {
-                var foundAccount = db.Users.SingleOrDefault(u => u.Id == userUpdated.Id);
-                if (foundAccount != null)
-                {
-                    foundAccount.UserName = userUpdated.UserName;
-                    foundAccount.Password = userUpdated.Password;
-                    foundAccount.PhoneNum = userUpdated.PhoneNum;
-                    foundAccount.IsAdmin = userUpdated.IsAdmin;
-                    foundAccount.FullName = userUpdated.FullName;
-                    
-                    db.SaveChanges();
-                    return true;
-                }
-                return false;
+                foundAccount.UserName = userUpdated.UserName;
+                foundAccount.Password = userUpdated.Password;
+                foundAccount.PhoneNum = userUpdated.PhoneNum;
+                foundAccount.IsAdmin = userUpdated.IsAdmin;
+                foundAccount.FullName = userUpdated.FullName;
+
+                db.SaveChanges();
+                return true;
             }
+            return false;
+
         }
         //better bool or int? 
         public bool DeleteAccount(int userId)
         {
-            using ExamsDbContext db = new ExamsDbContext();
+
+            var foundAccount = db.Users.SingleOrDefault(u => u.Id == userId);
+            if (foundAccount != null)
             {
-                var foundAccount = db.Users.SingleOrDefault(u => u.Id == userId);
-                if (foundAccount != null)
-                {
-                    db.Users.Remove(foundAccount);
-                    db.SaveChanges();
-                    return true;
-                }
-                return false;
+                db.Users.Remove(foundAccount);
+                db.SaveChanges();
+                return true;
             }
+            return false;
+
         }
         //should login be with Cookies too?
         public User? Login(string username, string password)
         {
-            using ExamsDbContext db = new ExamsDbContext();
+
+            var user = db.Users.SingleOrDefault(u => u.UserName == username && u.Password == password);
+            if (user != null)
             {
-                var user = db.Users.SingleOrDefault(u => u.UserName == username && u.Password == password);
-                if (user != null)
-                {
-                    return user;
-                }
-                return null;
+                return user;
             }
+            return null;
+
         }
 
         //wait to learn Cookie logout

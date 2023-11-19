@@ -2,16 +2,14 @@
 using Exams_Application.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Exams_Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TeacherCrudController : ControllerBase
+    public class TeacherController : ControllerBase
     {
-        private readonly TeacherCrudRepo _teacherRepository;
-        public TeacherCrudController(TeacherCrudRepo teacherRepository)
+        private readonly TeacherRepo _teacherRepository;
+        public TeacherController(TeacherRepo teacherRepository)
         {
             _teacherRepository = teacherRepository;
         }
@@ -44,15 +42,6 @@ namespace Exams_Application.Controllers
         public Question? CreateQuestion(Question question)
         {
             return _teacherRepository.CreateQuestion(question);
-        }
-
-
-        // PUT api/<TeacherCrudController>/5
-        [Route("[action]")]
-        [HttpPut]
-        public int GradeExamPerStudent(Exam studentExam)
-        {
-            return _teacherRepository.GradeExamPerStudent(studentExam);
         }
 
         // PUT api/<TeacherCrudController>/5

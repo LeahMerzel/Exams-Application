@@ -2,7 +2,7 @@
 
 namespace Exams_Application.Interfaces
 {
-    public interface IAccountCrudRepo
+    public interface IAccountRepo
     {
         User CreateAccount(User user);
         bool DeleteAccount(int userId);

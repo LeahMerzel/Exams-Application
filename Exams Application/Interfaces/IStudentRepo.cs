@@ -2,10 +2,11 @@
 
 namespace Exams_Application.Repositories
 {
-    public interface IStudentCrudRepo
+    public interface IStudentRepo
     {
+        List<Exam>? GetAllExamsToDo(int studentsTeacherId);
+        Exam? GetExamToDoById(int ExamId);
         Exam? LoginToExam(int examId);
-        string SubmitExam(Exam exam);
         List<Exam>? GetAllExamsTaken(int studentId);
 
     }

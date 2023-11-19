@@ -2,16 +2,19 @@
 using Exams_Application.Models;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Exams_Application.Controllers
+
+
+    //maybe can do Unity of work instead of accout repo becuase 
+    //all users use these functions ????
+
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountCrudController : ControllerBase
+    public class AccountController : ControllerBase
     {
-        private readonly IAccountCrudRepo _accountRepository;
-        public AccountCrudController(IAccountCrudRepo accountRepository)
+        private readonly IAccountRepo _accountRepository;
+        public AccountController(IAccountRepo accountRepository)
         {
             _accountRepository = accountRepository;
         }

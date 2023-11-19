@@ -6,11 +6,15 @@ using System.Linq;
 
 namespace Exams_Application.Repositories
 {
-    public class TeacherCrudRepo : ITeacherCrudRepo
+    public class TeacherRepo : ITeacherRepo
     {
+        private readonly ExamsDbContext db;
+        public TeacherRepo(ExamsDbContext dbContext)
+        {
+            db = dbContext;
+        }
         public Exam? GetExamById(int examId)
         {
-            using var db = new ExamsDbContext();
             var exam = db.Exams.SingleOrDefault(e=> e.ExamId == examId);
             if (exam == null)
                 return exam;
@@ -19,8 +23,6 @@ namespace Exams_Application.Repositories
         }
         public Exam? CreateExam(Exam exam)
         {
-            using ExamsDbContext db = new ExamsDbContext();
-            {
                 var teacherId = exam.TeacherId;
                 var teacherFound = db.Teachers.SingleOrDefault(t => t.Id == teacherId);
                 if (teacherFound != null)
@@ -31,13 +33,10 @@ namespace Exams_Application.Repositories
                 }
 
                 return null;
-            }
         }
         //will the second "list" override the first?
         public List<Exam>? GetAllExams(int teacherId)
         {
-            using ExamsDbContext db = new ExamsDbContext();
-            {
                 var teacher = db.Teachers.SingleOrDefault(t => t.Id == teacherId);
                 if (teacher != null)
                 {
@@ -52,12 +51,9 @@ namespace Exams_Application.Repositories
                     }
                 }
                 return null;
-            }
         }
         public Exam? UpdateExam(Exam exam)
         {
-            using ExamsDbContext db = new ExamsDbContext();
-            {
                 var examToUpdate = db.Exams.SingleOrDefault(e => e.ExamId == exam.ExamId);
                 if (examToUpdate != null && examToUpdate.ExamBegganAt != examToUpdate.ExamDateTime)
                 {
@@ -71,12 +67,9 @@ namespace Exams_Application.Repositories
                     return examToUpdate;
                 }
                 return null;
-            }
         }
         public bool DeleteExam(int examId)
         {
-            using ExamsDbContext db = new ExamsDbContext();
-            {
                 var exam = db.Exams.SingleOrDefault(e => e.ExamId == examId);
                 if (exam != null)
                 {
@@ -84,13 +77,10 @@ namespace Exams_Application.Repositories
                     db.SaveChanges();
                     return true;
                 }
-            }
             return false;
         }
         public Question? CreateQuestion(Question question)
         {
-            using ExamsDbContext db = new ExamsDbContext();
-            {
                 if (question != null)
                 {
                     db.Questions.Add(question);
@@ -98,13 +88,10 @@ namespace Exams_Application.Repositories
                     return question;
                 }
                 return null;
-            }
         }
         public List<Question>? GetAllQuestionsOfExam(int examId)
         {
             var list = new List<Question>();
-            using (var db = new ExamsDbContext())
-            {
                 var examWanted = db.Exams.SingleOrDefault(e => e.ExamId == examId);
                 if (examWanted != null)
                 {
@@ -112,12 +99,9 @@ namespace Exams_Application.Repositories
                     return list;
                 }
                 return null;
-            }
         }
         public Question UpdateQuestion(Question questionToUptade)
         {
-            using (var db = new ExamsDbContext())
-            {
                 var question = db.Questions.SingleOrDefault(q => q.QuestionNumber == questionToUptade.QuestionNumber);
                 if (question != null)
                 {
@@ -128,12 +112,9 @@ namespace Exams_Application.Repositories
                     return question;
                 }
                 return questionToUptade;
-            }
         }
         public bool DeleteQuestion(int questionId)
         {
-            using var db = new ExamsDbContext();
-            {
                 var question = db.Questions.SingleOrDefault(q => q.QuestionNumber == questionId);
                 if (question != null)
                 {
@@ -142,23 +123,6 @@ namespace Exams_Application.Repositories
                     return true;
                 }
                 return false;
-            }
-        }
-        public int GradeExamPerStudent(Exam studentExam)
-        {
-            int grade = 0;//to change according to input from client?
-           /* using (var db = new ExamsDbContext())
-            {
-                var student = db.Students.SingleOrDefault(s => s.Id == studentExam.StudentId);
-                if (student != null)
-                {
-                    studentExam.Grade = grade;
-                    student.AllExamsTaken.Add(studentExam);//does this add info of grade to student Db?
-                    var teacher = db.Teachers.SingleOrDefault(t => t.Id == studentExam.TeacherId);
-                    db.SaveChanges();
-                }
-            };*/
-            return grade;
         }
 /*        public double? GetExamGradeStatistic(int examId)
         {

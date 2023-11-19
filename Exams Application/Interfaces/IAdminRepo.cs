@@ -2,7 +2,7 @@
 
 namespace Exams_Application.Repositories
 {
-    public interface IAdminCrudRepo
+    public interface IAdminRepo
     {
         User? GetAccountById(int id);
         User CreateAccount(User user);

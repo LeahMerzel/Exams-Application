@@ -3,16 +3,14 @@ using Exams_Application.Models;
 using Exams_Application.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Exams_Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AdminCrudController : ControllerBase
+    public class AdminController : ControllerBase
     {
-        private readonly IAdminCrudRepo _adminRepository;
-        public AdminCrudController(IAdminCrudRepo adminRepository)
+        private readonly IAdminRepo _adminRepository;
+        public AdminController(IAdminRepo adminRepository)
         {
             _adminRepository = adminRepository;
         }

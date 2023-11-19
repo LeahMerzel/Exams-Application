@@ -3,16 +3,14 @@ using Exams_Application.Models;
 using Exams_Application.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Exams_Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StudentCrudController : ControllerBase
+    public class StudentController : ControllerBase
     {
-        private readonly IStudentCrudRepo _studentReposetory;
-        public StudentCrudController(IStudentCrudRepo studentReposetory)
+        private readonly IStudentRepo _studentReposetory;
+        public StudentController(IStudentRepo studentReposetory)
         {
             _studentReposetory = studentReposetory;//like this in re[po with dbcontext  לא חובה
         }
@@ -32,12 +30,12 @@ namespace Exams_Application.Controllers
             return _studentReposetory.LoginToExam(examId);
         }
 
-        // POST api/<StudentCrudController>
+/*        // POST api/<StudentCrudController>
         [HttpPost]
         public string SubmitExam([FromBody] Exam exam)
         {
             return _studentReposetory.SubmitExam(exam);
         }
-
+*/
     }
 }
