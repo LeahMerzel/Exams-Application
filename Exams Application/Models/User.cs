@@ -4,7 +4,6 @@ namespace Exams_Application.Models
 {
     public class User
     {
-        //how do i auto increment
         [Key]
         public int Id { get; set; }
         public string? UserName { get; set; }

@@ -4,10 +4,8 @@ namespace Exams_Application.Models
 {
     public class Teacher: User
     {
-
-        [NotMapped]
-        public DateOnly HireDate { get; set; }
-        public List<Student> TeachersStudents { get; set; }
-        public List<Exam> AllTeachersExams { get; set; }
+        public DateTime HireDate { get; set; }
+        public ICollection<Student>? TeachersStudents { get; set; }
+        public List<Exam>? AllTeachersExams { get; set; }
     }
 }

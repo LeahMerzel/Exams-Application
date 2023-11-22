@@ -14,8 +14,12 @@ namespace Exams_Application.Models
         public DateTime ExamDateTime { get; set; }
         public DateTime ExamBegganAt { get; set; }
         public DateTime ExamDurationTimer { get; set; }
+        public bool WasExamLoggedInToByStudent { get; set; }
         public bool IsOrderQuestionsRandom { get; set; }
         public List<Question> ExamQuestions { get; set; }
-        public ICollection<Student> StudentsToDoExam { get; set; } 
+        public ICollection<Student> StudentsToDoExam { get; set; }
+        public ICollection<ExamStudent>? ExamStudentsTook { get; set; }
+        public float ExamGradeAvg { get; set; }
+
     }
 }
