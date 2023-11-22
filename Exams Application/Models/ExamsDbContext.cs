@@ -14,6 +14,7 @@ namespace Exams_Application.Models
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Answer> Answers { get; set; }
+        public DbSet<ExamStudent> ExamsStudents { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

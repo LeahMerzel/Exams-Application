@@ -4,12 +4,10 @@ namespace Exams_Application.Models
 {
     public class Student: User
     {
-
-        [NotMapped]//dateonly didnt work for db
-        public DateOnly EnrolementDate { get; set; }
-        public List<ExamStudent>? ExamsToDo { get; set; } = new List<ExamStudent>();
+        public DateTime EnrolementDate { get; set; }
+        public ICollection<Exam>? ExamsToDo { get; set; } 
+        public List<ExamStudent>? AllExamsTaken { get; set;}
         public float GradeAvg { get; set; }
-        public List<Exam>? AllExamsTaken { get; set;}
 
     }
 }

@@ -80,14 +80,14 @@ namespace Exams_Application.Migrations
                     b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TeacherId1")
+                    b.Property<int?>("TeacherId")
                         .HasColumnType("int");
 
                     b.HasKey("ExamId");
 
                     b.HasIndex("StudentId");
 
-                    b.HasIndex("TeacherId1");
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Exams");
                 });
@@ -104,7 +104,7 @@ namespace Exams_Application.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("ExamStudent");
+                    b.ToTable("ExamsStudents");
                 });
 
             modelBuilder.Entity("Exams_Application.Models.Question", b =>
@@ -223,7 +223,7 @@ namespace Exams_Application.Migrations
 
                     b.HasOne("Exams_Application.Models.Teacher", null)
                         .WithMany("AllTeachersExams")
-                        .HasForeignKey("TeacherId1");
+                        .HasForeignKey("TeacherId");
                 });
 
             modelBuilder.Entity("Exams_Application.Models.ExamStudent", b =>

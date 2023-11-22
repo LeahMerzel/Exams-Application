@@ -8,6 +8,7 @@ using Exams_Application.Interfaces;
 
 namespace Exams_Application.Repositories
 {
+    //create generic interface and then inherit
     public class AccountRepo : IAccountRepo
     {
         private readonly ExamsDbContext db;

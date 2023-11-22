@@ -5,7 +5,7 @@ namespace Exams_Application.Repositories
 {
     public class ExamRepo : IExamRepo
     {
-        //not sure i need this repo
+        //create controller with authorizations
         public ExamRepo() { }
         public Exam? GetExamById(int id) { return new Exam(); }
         public List<Question> GetExamQuestions() { return new List<Question>(); }

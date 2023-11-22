@@ -12,7 +12,7 @@ namespace Exams_Application.Repositories
         }
         public List<Exam>? GetAllExamsToDo(int studentsTeacherId)
         {
-            var examsListToDo = db.Exams.Where(e => e.TeacherId == studentsTeacherId).ToList();
+            var examsListToDo = db.Exams.Where(e => e.TeacherOwnsExamId == studentsTeacherId).ToList();
             if (examsListToDo.Any())
                 return examsListToDo;
             return null;

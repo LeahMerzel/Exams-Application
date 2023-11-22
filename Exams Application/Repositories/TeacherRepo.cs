@@ -23,7 +23,7 @@ namespace Exams_Application.Repositories
         }
         public Exam? CreateExam(Exam exam)
         {
-                var teacherId = exam.TeacherId;
+                var teacherId = exam.TeacherOwnsExamId;
                 var teacherFound = db.Teachers.SingleOrDefault(t => t.Id == teacherId);
                 if (teacherFound != null)
                 {
@@ -43,7 +43,7 @@ namespace Exams_Application.Repositories
                     var list = db.Exams.ToList();
                     foreach (Exam exam in list)
                     {
-                        if (exam.TeacherId == teacherId)
+                        if (exam.TeacherOwnsExamId == teacherId)
                         {
                             list.Add(exam);
                             return list;
