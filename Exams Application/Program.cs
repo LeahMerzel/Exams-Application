@@ -1,3 +1,4 @@
+using Exams_Application.DB;
 using Exams_Application.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,7 +33,8 @@ namespace Exams_Application
                         builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
                     });
             });
-
+            builder.Services.AddDbContext<ExamsDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("project")));
 
             var app = builder.Build();
 

@@ -18,7 +18,8 @@ namespace Exams_Application.Models
         public bool IsOrderQuestionsRandom { get; set; }
         public List<Question> ExamQuestions { get; set; }
         public ICollection<Student> StudentsToDoExam { get; set; }
-        public ICollection<ExamStudent>? ExamStudentsTook { get; set; }
+        [InverseProperty("Exam")]
+        public ICollection<ExamStudent> ExamStudentsTook { get; set; }
         public float ExamGradeAvg { get; set; }
 
     }
