@@ -1,8 +1,5 @@
-using Exams_Application.Interfaces;
 using Exams_Application.Models;
-using Exams_Application.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Exams_Application.Repositories;
 
 namespace Exams_Application
 {
@@ -25,8 +22,6 @@ namespace Exams_Application
             });
            
             //is this in the right place on the page?
-            builder.Services.AddDbContext<ExamsDbContext>(options =>
-               options.UseSqlServer(builder.Configuration.GetConnectionString("project")));
 
             //what does this do?
             builder.Services.AddCors(options =>
@@ -38,10 +33,6 @@ namespace Exams_Application
                     });
             });
 
-            builder.Services.AddScoped<IAccountRepo, AccountRepo>();//Dependency Injection
-            builder.Services.AddScoped<IAdminRepo, AdminRepo>();
-            builder.Services.AddScoped<IStudentRepo, StudentRepo>();
-            builder.Services.AddScoped<ITeacherRepo, TeacherRepo>();
 
             var app = builder.Build();
 
