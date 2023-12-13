@@ -11,7 +11,8 @@ namespace Exams_Application.Models
         public string? PhoneNum { get; set; }
         public bool IsAdmin { get; set; }
         public string? FullName { get; set; }
+        public DateTime UserCreated { get; set; }
 
-       
+
     }
 }

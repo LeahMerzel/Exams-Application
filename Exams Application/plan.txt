@@ -45,3 +45,13 @@ public List<StudentExam> getAllExamsTaken(int studentId){}
 
 
 
+12/12/2023
+
+1. create DTO models as needed
+2. use async Task<IActionResult<Something>> methods in conrollers (only?)
+3. make EF work
+4. create DbContext instance at the begining of repo
+5. check that all methods work and are written well
+6. create generic repo and inherit - can it contain Login() Logout() too?
+7. want to use deligates and events, when a teacher publishes an exam the student (-subscriber) gets it
+8. and IOFiles, a student can print certain stuff
