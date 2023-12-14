@@ -1,6 +1,7 @@
 ﻿using Exams_Application.DB;
 using Exams_Application.Interfaces;
 using Exams_Application.Models;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 
 namespace Exams_Application.Repositories
@@ -40,6 +41,12 @@ namespace Exams_Application.Repositories
         {
             dbContext.Set<T>().Remove(entity);
             dbContext.SaveChanges();
+        }
+
+        public T? Find(Func<object, object> value)
+        {
+            var foundObj = dbContext.Set<T>().Find();
+            return foundObj != null ? foundObj : null;
         }
     }
 }

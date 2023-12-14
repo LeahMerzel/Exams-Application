@@ -1,43 +1,39 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
-using Exams_Application.Interfaces;
+﻿using Exams_Application.Interfaces;
 
-namespace Exams_Application.Services
+public class AuthService<T>
 {
-    public class AuthService : IAuthService//how come its not using my folder Interfaces?
+    private readonly IRepository<T> userRepository;
+    private readonly IHttpContextAccessor httpContextAccessor;
+
+    public AuthService(IRepository<T> userRepository, IHttpContextAccessor httpContextAccessor)
     {
-        private readonly SignInManager<IdentityUser> signInManager;
-        private readonly IHttpContextAccessor httpContextAccessor;
-
-        public AuthService(SignInManager<IdentityUser> signInManager, IHttpContextAccessor httpContextAccessor)
-        {
-            this.signInManager = signInManager;
-            this.httpContextAccessor = httpContextAccessor;
-        }
-
-        public async Task<SignInResult> LoginAsync(string username, string password)
-        {
-            var result = await signInManager.PasswordSignInAsync(username, password, false, lockoutOnFailure: false);
-
-            if (result.Succeeded)
-            {
-                // Simulate setting a cookie upon successful login
-                await httpContextAccessor.HttpContext.SignInAsync(
-                    CookieAuthenticationDefaults.AuthenticationScheme,
-                    new ClaimsPrincipal(new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, username) }, CookieAuthenticationDefaults.AuthenticationScheme))
-                );
-            }
-
-            return result;
-        }
-
-        public async Task LogoutAsync()
-        {
-            // Simulate clearing the authentication cookie
-            await httpContextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        }
+        this.userRepository = userRepository;
+        this.httpContextAccessor = httpContextAccessor;
     }
 
+    public bool Login(string username, string password)
+    {
+        // Replace this with your actual authentication logic
+        T user = userRepository.Find(u => /* Your authentication conditions here */);
+
+        if (user != null)
+        {
+            // Set authentication-related information in the HttpContext
+            // Example: httpContextAccessor.HttpContext.SignInAsync(...)
+
+            return true; // Authentication successful
+        }
+
+        return false; // Authentication failed
+    }
+
+    public void Logout()
+    {
+        // Clear authentication-related information
+        // Example: httpContextAccessor.HttpContext.SignOutAsync(...)
+
+        // Additional cleanup or logout logic
+
+        // Example: httpContextAccessor.HttpContext.Session.Clear();
+    }
 }
