@@ -9,5 +9,17 @@ namespace Exams_Application.Repositories
         {
         }
 
+        public string GetCorrectAnswer(Question question)
+        {
+            var answerList = question.Answers != null ? question.Answers.ToList() : null;
+            if (answerList != null)
+            {
+                var correctAnswer = answerList.Find(a=> a.IsCorrect = true);
+                if (correctAnswer != null) 
+                    return correctAnswer.AnswerDetailed != null? correctAnswer.AnswerDetailed : "couldn't find the correct answer.";
+            }
+            return "couldn't find the correct answer.";
+        }
+
     }
 }
