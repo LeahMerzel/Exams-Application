@@ -9,11 +9,13 @@ namespace Exams_Application.DB
         : base(options)
         {
         }
+        public DbSet<Course> Courses { get; set; }
         public DbSet<Exam> Exams { get; set; }
-        public DbSet<Teacher> Teachers { get; set; }
-        public DbSet<Student> Students { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Admin> Admins { get; set; } //does this make sense?
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
