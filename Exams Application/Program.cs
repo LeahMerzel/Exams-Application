@@ -1,5 +1,6 @@
 using Exams_Application.DB;
 using Exams_Application.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Exams_Application
@@ -35,6 +36,7 @@ namespace Exams_Application
             });
             builder.Services.AddDbContext<ExamsDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("project")));
+
 
             var app = builder.Build();
 
