@@ -5,9 +5,10 @@ namespace Exams_Application.Models
     public class Student: User
     {
         public DateTime EnrolementDate { get; set; }
-        public ICollection<Teacher>? StudentsTeachers { get; set; }
-        public ICollection<Exam>? ExamsToDo { get; set; } 
-        public List<ExamStudent>? AllExamsTaken { get; set;}
+        public List<Course>? StudentsCourses { get; set; }
+        public Dictionary<string, int>? ExamsTakenAndGrades { get; set; }//when student submits exam
+                                                                         //the grade and examName
+                                                                         //are pushed in to this Dictionary
         public float GradeAvg { get; set; }
 
     }

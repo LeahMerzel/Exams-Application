@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Exams_Application.Models
 {
-    public class Answer
+    public class Answer: BaseEntity
     {
-        [Key]
-        public int AnswerId { get; set; }
-        public int QuestionId { get; set; }
+        [ForeignKey("Question")]
+        public Guid QuestionId { get; set; }
         public int AnswerNumber { get; set; }
         public string? AnswerDetailed { get; set; }
         public bool IsCorrect { get; set; }
