@@ -60,14 +60,19 @@ public class GenericController<T> : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        repository.Delete(id);
+        var entity = repository.GetById(id);
+
+        if (entity == null)
+        {
+            return NotFound();
+        }
+
+        repository.Delete(entity);
         return NoContent();
     }
 
     private int GetEntityId(T entity)
     {
-        // Implement logic to get the ID from the generic entity
-        // This method assumes there's an 'Id' property; adjust as needed
         var idProperty = entity.GetType().GetProperty("Id");
         return (int)idProperty.GetValue(entity);
     }
