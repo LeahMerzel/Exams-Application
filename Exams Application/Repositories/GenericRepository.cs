@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Exams_Application.Repositories
 {
-    public class GenericRepository<T> : IRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly DbContext dbContext;
 

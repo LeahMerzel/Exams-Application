@@ -1,6 +1,6 @@
 ﻿namespace Exams_Application.Interfaces
 {
-    public interface IRepository<T>
+    public interface IGenericRepository<T>
     {
         T? GetById(int? id);
         IEnumerable<T> GetAll();

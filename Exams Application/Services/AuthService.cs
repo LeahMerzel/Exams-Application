@@ -2,10 +2,10 @@
 
 public class AuthService<T>
 {
-    private readonly IRepository<T> userRepository;
+    private readonly IGenericRepository<T> userRepository;
     private readonly IHttpContextAccessor httpContextAccessor;
 
-    public AuthService(IRepository<T> userRepository, IHttpContextAccessor httpContextAccessor)
+    public AuthService(IGenericRepository<T> userRepository, IHttpContextAccessor httpContextAccessor)
     {
         this.userRepository = userRepository;
         this.httpContextAccessor = httpContextAccessor;
