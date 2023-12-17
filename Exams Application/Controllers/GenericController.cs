@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 [Route("api/[controller]")]
 [ApiController]
-public class GenericController<T> : ControllerBase
+public class GenericController<T> : ControllerBase, IGenericController<T>
 {
     private readonly IGenericRepository<T> repository;
 
@@ -46,9 +46,11 @@ public class GenericController<T> : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public IActionResult Update(int id, [FromBody] T entity)
+    public IActionResult Update(Guid id, [FromBody] T entity)
     {
-        if (id != GetEntityId(entity))
+        Guid entityId = GetEntityId(entity);
+
+        if (id != entityId)
         {
             return BadRequest();
         }
@@ -70,10 +72,19 @@ public class GenericController<T> : ControllerBase
         repository.Delete(entity);
         return NoContent();
     }
-
-    private int GetEntityId(T entity)
+    //maybe want to change following - there are lots of options as to how to implement method
+    //also need to understand it better
+    public Guid GetEntityId(T entity)
     {
-        var idProperty = entity.GetType().GetProperty("Id");
-        return (int)idProperty.GetValue(entity);
+        var idProperty = entity?.GetType().GetProperty("Id");
+        var idValue = idProperty?.GetValue(entity);
+
+        if (idValue is Guid guidValue)
+        {
+            return guidValue;
+        }
+
+        throw new InvalidOperationException("Invalid or missing 'Id' property value.");
     }
+
 }
