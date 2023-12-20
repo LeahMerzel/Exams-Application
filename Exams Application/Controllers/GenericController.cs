@@ -14,14 +14,14 @@ public class GenericController<T> : ControllerBase, IGenericController<T>
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<T>> GetAll()
+    public async Task<ActionResult<IEnumerable<T>>> GetAll()
     {
         var entities = repository.GetAll();
         return Ok(entities);
     }
 
     [HttpGet("{id}")]
-    public ActionResult<T> GetById(int id)
+    public async Task<ActionResult<T>> GetById(int id)
     {
         var entity = repository.GetById(id);
 
@@ -34,7 +34,7 @@ public class GenericController<T> : ControllerBase, IGenericController<T>
     }
 
     [HttpPost]
-    public IActionResult Create([FromBody] T entity)
+    public async Task<IActionResult> Create([FromBody] T entity)
     {
         if (entity == null)
         {
@@ -46,7 +46,7 @@ public class GenericController<T> : ControllerBase, IGenericController<T>
     }
 
     [HttpPut("{id}")]
-    public IActionResult Update(Guid id, [FromBody] T entity)
+    public async Task<IActionResult> Update(Guid id, [FromBody] T entity)
     {
         Guid entityId = GetEntityId(entity);
 
@@ -60,7 +60,7 @@ public class GenericController<T> : ControllerBase, IGenericController<T>
     }
 
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
         var entity = repository.GetById(id);
 
@@ -74,7 +74,7 @@ public class GenericController<T> : ControllerBase, IGenericController<T>
     }
     //maybe want to change following - there are lots of options as to how to implement method
     //also need to understand it better
-    public Guid GetEntityId(T entity)
+    public async Task<Guid> GetEntityId(T entity)
     {
         var idProperty = entity?.GetType().GetProperty("Id");
         var idValue = idProperty?.GetValue(entity);

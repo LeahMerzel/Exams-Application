@@ -2,10 +2,10 @@
 
 public interface IGenericController<T>
 {
-    IActionResult Create([FromBody] T entity);
-    IActionResult Delete(int id);
-    ActionResult<IEnumerable<T>> GetAll();
-    ActionResult<T> GetById(int id);
-    Guid GetEntityId(T entity);
-    IActionResult Update(Guid id, [FromBody] T entity);
+    Task<IActionResult> Create([FromBody] T entity);
+    Task<IActionResult> Delete(int id);
+    Task<ActionResult<IEnumerable<T>>> GetAll();
+    Task<ActionResult<T>> GetById(int id);
+    Task<Guid> GetEntityId(T entity);
+    Task<IActionResult> Update(Guid id, [FromBody] T entity);
 }
