@@ -2,11 +2,11 @@
 {
     public interface IGenericRepository<T>
     {
-        T? GetById(int? id);
-        IEnumerable<T> GetAll();
-        void Add(T entity);
-        void Update(T entity);
-        void Delete(T entity);
-        T Find(Func<object, object> value);
+        Task<T?> GetById(int? id);
+        Task<IEnumerable<T>> GetAll();
+        Task Add(T entity);
+        Task Update(T entity);
+        Task Delete(T entity);
+        Task<T> Find(Func<object, object> value);
     }
 }

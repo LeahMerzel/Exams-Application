@@ -15,38 +15,39 @@ namespace Exams_Application.Repositories
             this.dbContext = dbContext;
         }
 
-        public T? GetById(int? id)
+        public async Task<T?> GetById(int? id)
         {
-            return dbContext.Set<T>().Find(id);
+            return await dbContext.Set<T>().FindAsync(id);
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAll()
         {
-            return dbContext.Set<T>().ToList();
+            return await dbContext.Set<T>().ToListAsync();
         }
 
-        public void Add(T entity)
+        public async Task Add(T entity)
         {
             dbContext.Set<T>().Add(entity);
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
         }
 
-        public void Update(T entity)
+        public async Task Update(T entity)
         {
             dbContext.Entry(entity).State = EntityState.Modified;
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
         }
 
-        public void Delete(T entity)
+        public async Task Delete(T entity)
         {
             dbContext.Set<T>().Remove(entity);
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
         }
 
-        public T? Find(Func<object, object> value)
+        public async Task<T?> Find(Func<object, object> value)
         {
-            var foundObj = dbContext.Set<T>().Find();
+            var foundObj = await dbContext.Set<T>().FindAsync();
             return foundObj != null ? foundObj : null;
         }
+
     }
 }
