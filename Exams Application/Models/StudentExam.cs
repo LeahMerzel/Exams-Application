@@ -11,5 +11,7 @@ namespace Exams_Application.Models
         public Guid StudentId { get; set; }
         [ForeignKey("Exam")]
         public int ExamId { get; set; }
+
+        //figures dont need a ctor to sart MistakesInExam cus not always are there mistakes
     }
 }

@@ -2,9 +2,15 @@
 {
     public class Course: BaseEntity
     {
-        public List<Teacher>? CourseTeachers { get; set; } = new List<Teacher>();
-        public List<Student>? CourseStudents { get; set; } = new List<Student>();
-        public List<Exam>? CourseExams { get; set; } = new List<Exam>();
+        public List<Teacher>? CourseTeachers { get; set; } 
+        public List<Student>? CourseStudents { get; set; }
+        public List<Exam>? CourseExams { get; set; } 
+        public Course()
+        {
+            CourseTeachers = new List<Teacher>();
+            CourseStudents = new List<Student>();
+            CourseExams = new List<Exam>();
+        }
 
     }
 }
