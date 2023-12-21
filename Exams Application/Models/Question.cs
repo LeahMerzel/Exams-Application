@@ -13,6 +13,6 @@ namespace Exams_Application.Models
         public int CorrectAnswerIndex { get; set; }
         public int QuestionScoring { get; set; }
         [ForeignKey("Exam")]
-        public int ExamId { get; set; }
+        public Guid ExamId { get; set; }
     }
 }

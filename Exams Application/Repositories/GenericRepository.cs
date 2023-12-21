@@ -8,7 +8,7 @@ namespace Exams_Application.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly DbContext dbContext;
+        protected readonly DbContext dbContext;
 
         public GenericRepository(DbContext dbContext)
         {

@@ -16,14 +16,14 @@ public class GenericController<T> : ControllerBase, IGenericController<T>
     [HttpGet]
     public async Task<ActionResult<IEnumerable<T>>> GetAll()
     {
-        var entities = repository.GetAll();
+        var entities = await repository.GetAll();
         return Ok(entities);
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<T>> GetById(int id)
     {
-        var entity = repository.GetById(id);
+        var entity = await repository.GetById(id);
 
         if (entity == null)
         {
@@ -41,40 +41,40 @@ public class GenericController<T> : ControllerBase, IGenericController<T>
             return BadRequest();
         }
 
-        repository.Add(entity);
-        return CreatedAtAction(nameof(GetById), new { id = GetEntityId(entity) }, entity);
+        await repository.Add(entity);
+        return CreatedAtAction(nameof(GetById), new { id = await GetEntityId(entity) }, entity);
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(Guid id, [FromBody] T entity)
     {
-        Guid entityId = GetEntityId(entity);
+        Guid entityId = await GetEntityId(entity);
 
         if (id != entityId)
         {
             return BadRequest();
         }
 
-        repository.Update(entity);
+        await repository.Update(entity);
         return NoContent();
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var entity = repository.GetById(id);
+        var entity = await repository.GetById(id);
 
         if (entity == null)
         {
             return NotFound();
         }
 
-        repository.Delete(entity);
+        await repository.Delete(entity);
         return NoContent();
     }
     //maybe want to change following - there are lots of options as to how to implement method
     //also need to understand it better
-    public async Task<Guid> GetEntityId(T entity)
+    public Guid GetEntityId(T entity)
     {
         var idProperty = entity?.GetType().GetProperty("Id");
         var idValue = idProperty?.GetValue(entity);
