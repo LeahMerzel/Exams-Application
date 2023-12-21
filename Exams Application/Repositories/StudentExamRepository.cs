@@ -14,7 +14,8 @@ namespace Exams_Application.Repositories
 
             if (student != null)
             {
-                //...
+                student.StudentsTakenExams.Add(studentExam);
+                await dbContext.SaveChangesAsync();
             }
 
             // Perform other operations and return the grade or result

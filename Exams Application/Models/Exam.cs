@@ -19,7 +19,7 @@ namespace Exams_Application.Models
         //public DateTime ExamDurationTimer { get; set; }
         public bool WasExamLoggedInToByStudent { get; set; }
         public bool IsOrderQuestionsRandom { get; set; }
-        public List<Question>? ExamQuestions { get; set; }
+        public List<Question>? ExamQuestions { get; set; } = new List<Question>();
         public int ExamGrade { get; set; }// this resets with each new instance of Exam - how to?
         public float ExamGradeAvg { get; set; }
 
