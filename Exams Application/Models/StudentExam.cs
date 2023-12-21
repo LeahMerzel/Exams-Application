@@ -5,8 +5,8 @@ namespace Exams_Application.Models
     public class StudentExam: BaseEntity
     {
         public int Grade { get; set; }
-        public List<Question>? MistakesInExam { get; set; }
-        //where do i do functionality that can show correct answer?
+        //dp i need this? public List<Question>? QuestionsAnswered { get; set; }
+        public List<Question>? QuestionsFailed { get; set; }
         [ForeignKey("Student")]
         public Guid StudentId { get; set; }
         [ForeignKey("Exam")]

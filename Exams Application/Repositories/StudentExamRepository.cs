@@ -10,18 +10,26 @@ namespace Exams_Application.Repositories
         }
         public async Task<StudentExam> SubmitStudentExamToDb(StudentExam studentExam)
         {
-            var student = await dbContext.Set<Student>().SingleOrDefaultAsync(s => s.Id == studentExam.StudentId);
+            var student = await dbContext.Set<Student>()
+                .Include(s => s.StudentsTakenExams) //do i need this here if anyhow StudentsTakenExams may be null?
+                .SingleOrDefaultAsync(s => s.Id == studentExam.StudentId);
 
             if (student != null)
             {
                 student.StudentsTakenExams.Add(studentExam);
                 await dbContext.SaveChangesAsync();
             }
-
-            // Perform other operations and return the grade or result
             return studentExam;
         }
-        public List<Question> ReturnQuestionsFailedInExam(Guid StudentExamId) { throw new NotImplementedException();}
+        public List<Question>? ReturnQuestionsFailedInExam(StudentExam studentExam) 
+        {
+            if (studentExam.QuestionsFailed != null)
+            {
+                var questionsFailed = studentExam.QuestionsFailed;
+                return questionsFailed;
+            }
+            return null;
+        }
        
         //should the following 2 or 3 be part of Client side code?
         public int GetNumberOfQuestionsDone(int examId) { return 0; }
