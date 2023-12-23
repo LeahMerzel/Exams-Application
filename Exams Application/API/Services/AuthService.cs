@@ -1,4 +1,4 @@
-﻿using Exams_Application.Interfaces;
+﻿/*using Exams_Application.Interfaces;
 
 public class AuthService<T>
 {
@@ -15,7 +15,7 @@ public class AuthService<T>
     public bool Login(string username, string password)
     {
         // Replace this with your actual authentication logic
-        T user = userRepository.Find(u => /* Your authentication conditions here */);
+        T user = userRepository.Find(u => *//* Your authentication conditions here *//*);
 
         if (user != null)
         {
@@ -38,3 +38,4 @@ public class AuthService<T>
         // Example: httpContextAccessor.HttpContext.Session.Clear();
     }
 }
+*/

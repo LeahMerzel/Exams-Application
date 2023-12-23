@@ -1,11 +1,12 @@
-﻿using Exams_Application.Data.Models;
+﻿using Exams_Application.Data.DB;
+using Exams_Application.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Exams_Application.Repositories
 {
     public class StudentExamRepository : GenericRepository<StudentExam>
     {
-        public StudentExamRepository(DbContext dbContext) : base(dbContext)
+        public StudentExamRepository(ExamsDbContext dbContext) : base(dbContext)
         {
         }
         public async Task<StudentExam> SubmitStudentExamToDb(StudentExam studentExam)

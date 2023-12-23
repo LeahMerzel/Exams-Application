@@ -1,13 +1,14 @@
-﻿using Exams_Application.Interfaces;
+﻿using Exams_Application.Data.DB;
+using Exams_Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Exams_Application.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        protected readonly DbContext dbContext;
+        protected readonly ExamsDbContext dbContext;
 
-        public GenericRepository(DbContext dbContext)
+        public GenericRepository(ExamsDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
