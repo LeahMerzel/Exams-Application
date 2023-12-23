@@ -1,4 +1,4 @@
-using Exams_Application.DB;
+using Exams_Application.Data.DB;
 using Exams_Application.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
