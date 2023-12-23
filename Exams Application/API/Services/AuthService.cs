@@ -1,4 +1,4 @@
-﻿using Exams_Application.Core.Interfaces;
+﻿using Exams_Application.Interfaces;
 
 public class AuthService<T>
 {

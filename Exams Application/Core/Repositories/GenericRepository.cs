@@ -1,7 +1,4 @@
-﻿using Exams_Application.DB;
-using Exams_Application.Interfaces;
-using Exams_Application.Models;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using Exams_Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Exams_Application.Repositories

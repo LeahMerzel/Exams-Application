@@ -1,6 +1,5 @@
-﻿using Exams_Application.Core.Interfaces;
+﻿using Exams_Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -42,13 +41,13 @@ public class GenericController<T> : ControllerBase, IGenericController<T>
         }
 
         await repository.Add(entity);
-        return CreatedAtAction(nameof(GetById), new { id = await GetEntityId(entity) }, entity);
+        return CreatedAtAction(nameof(GetById), new { id = GetEntityId(entity) }, entity);
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(Guid id, [FromBody] T entity)
     {
-        Guid entityId = await GetEntityId(entity);
+        Guid entityId = GetEntityId(entity);
 
         if (id != entityId)
         {
