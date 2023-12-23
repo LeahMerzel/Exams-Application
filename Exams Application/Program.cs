@@ -1,4 +1,7 @@
+using Exams_Application.Core.Repositories;
 using Exams_Application.Data.DB;
+using Exams_Application.Interfaces;
+using Exams_Application.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,9 +25,21 @@ namespace Exams_Application
                 c.CustomSchemaIds(type => type.FullName);
             });
            
-            //is this in the right place on the page?
 
-            //what does this do?
+            builder.Services.AddScoped<AdminRepository>();
+            builder.Services.AddScoped<AnswerRepository>();
+            builder.Services.AddScoped<CourseRepository>();
+            builder.Services.AddScoped<ExamsRepository>();
+            builder.Services.AddScoped<QuestionRepository>();
+            builder.Services.AddScoped<StudentExamRepository>();
+            builder.Services.AddScoped<StudentRepository>();
+            builder.Services.AddScoped<TeacherRepository>();
+            builder.Services.AddScoped<UserAccountRepository>();
+            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+            builder.Services.AddDbContext<ExamsDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("project")));
+
             builder.Services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
@@ -33,13 +48,9 @@ namespace Exams_Application
                         builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
                     });
             });
-            builder.Services.AddDbContext<ExamsDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("project")));
-
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -48,6 +59,7 @@ namespace Exams_Application
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();//need to do auth
             app.UseAuthorization();
 
             app.MapControllers();
