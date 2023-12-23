@@ -1,9 +1,6 @@
 ﻿using Exams_Application.Core.Repositories;
 using Exams_Application.Data.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Exams_Application.Controllers
 {

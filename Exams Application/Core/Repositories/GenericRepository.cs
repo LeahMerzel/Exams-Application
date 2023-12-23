@@ -12,9 +12,9 @@ namespace Exams_Application.Repositories
             this.dbContext = dbContext;
         }
 
-        public async Task<T?> GetById(int? id)
+        public T? GetById(Guid? id)
         {
-            return await dbContext.Set<T>().FindAsync(id);
+            return dbContext.Set<T>().Find(id);
         }
 
         public async Task<IEnumerable<T>> GetAll()

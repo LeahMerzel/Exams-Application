@@ -20,9 +20,9 @@ public class GenericController<T> : ControllerBase, IGenericController<T>
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<T>> GetById(int id)
+    public ActionResult<T> GetById(Guid id)
     {
-        var entity = await repository.GetById(id);
+        var entity = repository.GetById(id);
 
         if (entity == null)
         {
@@ -59,9 +59,9 @@ public class GenericController<T> : ControllerBase, IGenericController<T>
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> Delete(Guid id)
     {
-        var entity = await repository.GetById(id);
+        var entity = repository.GetById(id);
 
         if (entity == null)
         {

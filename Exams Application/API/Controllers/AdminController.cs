@@ -1,6 +1,6 @@
 ﻿using Exams_Application.Data.Models;
-using Exams_Application.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Exams_Application.Repositories;
 
 namespace Exams_Application.Controllers
 {
