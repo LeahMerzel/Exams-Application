@@ -2,7 +2,6 @@ using Exams_Application.Core.Repositories;
 using Exams_Application.Data.DB;
 using Exams_Application.Interfaces;
 using Exams_Application.Repositories;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Exams_Application
@@ -15,12 +14,13 @@ namespace Exams_Application
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(c => {
+            builder.Services.AddSwaggerGen(/*c =>
+            {
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
                 c.IgnoreObsoleteActions();
                 c.IgnoreObsoleteProperties();
                 c.CustomSchemaIds(type => type.FullName);
-            });
+            }*/);
 
             builder.Services.AddScoped<AdminRepository>();
             builder.Services.AddScoped<AnswerRepository>();
@@ -50,7 +50,7 @@ namespace Exams_Application
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(/*c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Exams API")*/);
             }
 
             app.UseHttpsRedirection();
@@ -63,6 +63,8 @@ namespace Exams_Application
 
 
             app.Run();
+
+
         }
     }
 }

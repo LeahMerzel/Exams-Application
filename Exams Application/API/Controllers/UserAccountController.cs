@@ -9,6 +9,7 @@ namespace Exams_Application.Controllers
     [ApiController]
     public class UserAccountController : GenericController<User>
     {
+        private readonly UserAccountRepository userAccountRepository;
         public UserAccountController(UserAccountRepository userAccountRepository) :base(userAccountRepository) 
         {
         }

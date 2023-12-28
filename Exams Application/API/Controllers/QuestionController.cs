@@ -8,6 +8,7 @@ namespace Exams_Application.Controllers
     [ApiController]
     public class QuestionController : GenericController<Question>
     {
+        private readonly QuestionRepository questionRepository;
         public QuestionController(QuestionRepository questionRepository) :base(questionRepository) 
         {
         }
