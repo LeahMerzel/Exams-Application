@@ -4,6 +4,8 @@ using System.Timers;
 
 public class Exam : BaseEntity
 {
+    private DateTime examStartTime; // Declare the examStartTime field
+
     [ForeignKey("Teacher")]
     public Guid TeacherOwnsExamId { get; }
     public string? ExamDescription { get; set; }
@@ -35,7 +37,21 @@ public class Exam : BaseEntity
     }
     private void OnTimedEvent(object sender, ElapsedEventArgs e)
     {
-        // Handle timer tick event (e.g., update remaining time)
-        // This method will be called every second
+        // This method will be called every time the timer ticks
+
+        // Calculate remaining time in seconds
+        var remainingTimeInSeconds = (int)((ExamTimer.Interval - (DateTime.Now - examStartTime).TotalMilliseconds) / 1000);
+
+        // You can use remainingTimeInSeconds as needed, for example, update UI or perform actions when time is up
+        Console.WriteLine($"Remaining Time: {remainingTimeInSeconds} seconds");
+
+        // Example: If the remaining time is zero, stop the timer
+        if (remainingTimeInSeconds <= 0)
+        {
+            ExamTimer.Enabled = false;
+
+            // Perform actions when the time is up
+            Console.WriteLine("Exam Time is Up!");
+        }
     }
 }
