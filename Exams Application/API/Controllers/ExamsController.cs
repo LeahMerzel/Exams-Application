@@ -14,19 +14,6 @@ namespace Exams_Application.Controllers
         {
         }
 
-        [HttpPost("{id}/start-timer")]
-        public async Task<IActionResult> StartExamTimer(Guid id, [FromBody] int durationInMinutes)
-        {
-            var success = await examRepository.StartExamTimer(id, durationInMinutes);
-
-            if (success)
-            {
-                return Ok();
-            }
-
-            return NotFound();
-        }
-
     }
 }
 

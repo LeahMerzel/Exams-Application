@@ -9,6 +9,25 @@ namespace Exams_Application.Repositories
         public StudentExamRepository(ExamsDbContext dbContext) : base(dbContext)
         {
         }
+
+        public async Task<bool> StudentLoggedInToExam(Guid entityId)
+        {
+            var studentExam = await dbContext.Set<StudentExam>().FindAsync(entityId);
+
+            if (studentExam == null)
+            {
+                return false; // StudentExam not found
+            }
+
+            // Start the exam timer
+            studentExam.StartExamTimer(studentExam.DurationInMinutes);
+
+            // Save changes to the database
+            await dbContext.SaveChangesAsync();
+
+            return true; // Success
+        }
+
         public async Task<StudentExam> SubmitStudentExamToDb(StudentExam studentExam)
         {
             var student = await dbContext.Set<Student>()

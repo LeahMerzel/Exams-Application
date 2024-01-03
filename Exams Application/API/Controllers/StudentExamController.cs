@@ -14,6 +14,19 @@ public class StudentExamController : GenericController<StudentExam>
         this.studentExamRepository = studentExamRepository;
     }
 
+    [HttpPost("{id}/student-login")]
+    public async Task<IActionResult> StudentLogin(Guid id)
+    {
+        var success = await studentExamRepository.StudentLoggedInToExam(id);
+
+        if (success)
+        {
+            return Ok();
+        }
+
+        return NotFound();
+    }
+
     [HttpPost("submit")]
     public async Task<ActionResult<StudentExam>> SubmitStudentExamToDb([FromBody] StudentExam studentExam)
     {
