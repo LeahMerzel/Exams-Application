@@ -9,7 +9,7 @@ namespace Exams_Application.Controllers
     [ApiController]
     public class ExamsController : GenericController<Exam>
     {
-        private readonly ExamsRepository examRepository;
+        private readonly ExamsRepository? examRepository;
         public ExamsController(ExamsRepository examsRepository) :base(examsRepository) 
         {
         }

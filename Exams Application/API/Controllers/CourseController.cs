@@ -8,7 +8,7 @@ namespace Exams_Application.Controllers
     [ApiController]
     public class CourseController : GenericController<Course>
     {
-        private readonly CourseRepository courseRepository;
+        private readonly CourseRepository? courseRepository;
         public CourseController(CourseRepository courseRepository) :base(courseRepository) 
         {
         }
