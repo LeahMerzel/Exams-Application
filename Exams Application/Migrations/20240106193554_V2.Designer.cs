@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Exams_Application.Migrations
 {
     [DbContext(typeof(ExamsDbContext))]
-    [Migration("20231214104950_V1")]
-    partial class V1
+    [Migration("20240106193554_V2")]
+    partial class V2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,87 +55,7 @@ namespace Exams_Application.Migrations
                     b.ToTable("CourseTeacher");
                 });
 
-            modelBuilder.Entity("Exams_Application.Models.Admin", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNum")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Admins");
-                });
-
-            modelBuilder.Entity("Exams_Application.Models.Answer", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("AnswerDetailed")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("AnswerNumber")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsCorrect")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("QuestionId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuestionId");
-
-                    b.ToTable("Answers");
-                });
-
-            modelBuilder.Entity("Exams_Application.Models.Course", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Courses");
-                });
-
-            modelBuilder.Entity("Exams_Application.Models.Exam", b =>
+            modelBuilder.Entity("Exam", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -159,18 +79,15 @@ namespace Exams_Application.Migrations
                     b.Property<float>("ExamGradeAvg")
                         .HasColumnType("real");
 
-                    b.Property<bool>("IsOrderQuestionsRandom")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsOrderQuestionsRandom")
+                        .HasColumnType("bit");
+
                     b.Property<Guid?>("TeacherId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("WasExamLoggedInToByStudent")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -181,7 +98,57 @@ namespace Exams_Application.Migrations
                     b.ToTable("Exams");
                 });
 
-            modelBuilder.Entity("Exams_Application.Models.Question", b =>
+            modelBuilder.Entity("Exams_Application.Data.Models.Answer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AnswerDetailed")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AnswerNumber")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsCorrect")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("QuestionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("Answers");
+                });
+
+            modelBuilder.Entity("Exams_Application.Data.Models.Course", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("Exams_Application.Data.Models.Question", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -193,21 +160,18 @@ namespace Exams_Application.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ExamId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("ExamId1")
+                    b.Property<Guid>("ExamId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsImage")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsOrderAnswersRandom")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("QuestionDescription")
                         .HasColumnType("nvarchar(max)");
@@ -223,14 +187,14 @@ namespace Exams_Application.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExamId1");
+                    b.HasIndex("ExamId");
 
                     b.HasIndex("StudentExamId");
 
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("Exams_Application.Models.Student", b =>
+            modelBuilder.Entity("Exams_Application.Data.Models.StudentExam", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -239,66 +203,36 @@ namespace Exams_Application.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EnrolementDate")
+                    b.Property<int>("DurationInMinutes")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("ExamId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ExamStartTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("GradeAvg")
-                        .HasColumnType("real");
-
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNum")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Students");
-                });
-
-            modelBuilder.Entity("Exams_Application.Models.StudentExam", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ExamId")
-                        .HasColumnType("int");
 
                     b.Property<int>("Grade")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("StudentId1")
+                    b.Property<Guid>("StudentId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("WasExamLoggedInToByStudent")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StudentId1");
+                    b.HasIndex("StudentId");
 
                     b.ToTable("StudentsExams");
                 });
 
-            modelBuilder.Entity("Exams_Application.Models.Teacher", b =>
+            modelBuilder.Entity("Exams_Application.Data.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -307,16 +241,15 @@ namespace Exams_Application.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("FullName")
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("HireDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -326,20 +259,60 @@ namespace Exams_Application.Migrations
                     b.Property<string>("PhoneNum")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Teachers");
+                    b.ToTable("Users");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("Exams_Application.Data.Models.Admin", b =>
+                {
+                    b.HasBaseType("Exams_Application.Data.Models.User");
+
+                    b.HasDiscriminator().HasValue("Admin");
+                });
+
+            modelBuilder.Entity("Exams_Application.Data.Models.Student", b =>
+                {
+                    b.HasBaseType("Exams_Application.Data.Models.User");
+
+                    b.Property<DateTime>("EnrolementDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<float>("GradeAvg")
+                        .HasColumnType("real");
+
+                    b.HasDiscriminator().HasValue("Student");
+                });
+
+            modelBuilder.Entity("Exams_Application.Data.Models.Teacher", b =>
+                {
+                    b.HasBaseType("Exams_Application.Data.Models.User");
+
+                    b.Property<DateTime>("HireDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasDiscriminator().HasValue("Teacher");
                 });
 
             modelBuilder.Entity("CourseStudent", b =>
                 {
-                    b.HasOne("Exams_Application.Models.Student", null)
+                    b.HasOne("Exams_Application.Data.Models.Student", null)
                         .WithMany()
                         .HasForeignKey("CourseStudentsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Exams_Application.Models.Course", null)
+                    b.HasOne("Exams_Application.Data.Models.Course", null)
                         .WithMany()
                         .HasForeignKey("StudentsCoursesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -348,83 +321,87 @@ namespace Exams_Application.Migrations
 
             modelBuilder.Entity("CourseTeacher", b =>
                 {
-                    b.HasOne("Exams_Application.Models.Teacher", null)
+                    b.HasOne("Exams_Application.Data.Models.Teacher", null)
                         .WithMany()
                         .HasForeignKey("CourseTeachersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Exams_Application.Models.Course", null)
+                    b.HasOne("Exams_Application.Data.Models.Course", null)
                         .WithMany()
                         .HasForeignKey("TeachersCoursesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Exams_Application.Models.Answer", b =>
+            modelBuilder.Entity("Exam", b =>
                 {
-                    b.HasOne("Exams_Application.Models.Question", null)
+                    b.HasOne("Exams_Application.Data.Models.Course", null)
+                        .WithMany("CourseExams")
+                        .HasForeignKey("CourseId");
+
+                    b.HasOne("Exams_Application.Data.Models.Teacher", null)
+                        .WithMany("AllTeachersExams")
+                        .HasForeignKey("TeacherId");
+                });
+
+            modelBuilder.Entity("Exams_Application.Data.Models.Answer", b =>
+                {
+                    b.HasOne("Exams_Application.Data.Models.Question", null)
                         .WithMany("Answers")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Exams_Application.Models.Exam", b =>
+            modelBuilder.Entity("Exams_Application.Data.Models.Question", b =>
                 {
-                    b.HasOne("Exams_Application.Models.Course", null)
-                        .WithMany("CourseExams")
-                        .HasForeignKey("CourseId");
-
-                    b.HasOne("Exams_Application.Models.Teacher", null)
-                        .WithMany("AllTeachersExams")
-                        .HasForeignKey("TeacherId");
-                });
-
-            modelBuilder.Entity("Exams_Application.Models.Question", b =>
-                {
-                    b.HasOne("Exams_Application.Models.Exam", null)
+                    b.HasOne("Exam", null)
                         .WithMany("ExamQuestions")
-                        .HasForeignKey("ExamId1");
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Exams_Application.Models.StudentExam", null)
-                        .WithMany("MistakesInExam")
+                    b.HasOne("Exams_Application.Data.Models.StudentExam", null)
+                        .WithMany("QuestionsFailed")
                         .HasForeignKey("StudentExamId");
                 });
 
-            modelBuilder.Entity("Exams_Application.Models.StudentExam", b =>
+            modelBuilder.Entity("Exams_Application.Data.Models.StudentExam", b =>
                 {
-                    b.HasOne("Exams_Application.Models.Student", null)
+                    b.HasOne("Exams_Application.Data.Models.Student", null)
                         .WithMany("StudentsTakenExams")
-                        .HasForeignKey("StudentId1");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("Exams_Application.Models.Course", b =>
-                {
-                    b.Navigation("CourseExams");
-                });
-
-            modelBuilder.Entity("Exams_Application.Models.Exam", b =>
+            modelBuilder.Entity("Exam", b =>
                 {
                     b.Navigation("ExamQuestions");
                 });
 
-            modelBuilder.Entity("Exams_Application.Models.Question", b =>
+            modelBuilder.Entity("Exams_Application.Data.Models.Course", b =>
+                {
+                    b.Navigation("CourseExams");
+                });
+
+            modelBuilder.Entity("Exams_Application.Data.Models.Question", b =>
                 {
                     b.Navigation("Answers");
                 });
 
-            modelBuilder.Entity("Exams_Application.Models.Student", b =>
+            modelBuilder.Entity("Exams_Application.Data.Models.StudentExam", b =>
+                {
+                    b.Navigation("QuestionsFailed");
+                });
+
+            modelBuilder.Entity("Exams_Application.Data.Models.Student", b =>
                 {
                     b.Navigation("StudentsTakenExams");
                 });
 
-            modelBuilder.Entity("Exams_Application.Models.StudentExam", b =>
-                {
-                    b.Navigation("MistakesInExam");
-                });
-
-            modelBuilder.Entity("Exams_Application.Models.Teacher", b =>
+            modelBuilder.Entity("Exams_Application.Data.Models.Teacher", b =>
                 {
                     b.Navigation("AllTeachersExams");
                 });

@@ -2,7 +2,10 @@ using Exams_Application.Core.Repositories;
 using Exams_Application.Data.DB;
 using Exams_Application.Interfaces;
 using Exams_Application.Repositories;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 
 namespace Exams_Application
 {
@@ -14,13 +17,16 @@ namespace Exams_Application
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(/*c =>
+
+            builder.Services.AddSwaggerGen(c =>
             {
-                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
-                c.IgnoreObsoleteActions();
-                c.IgnoreObsoleteProperties();
-                c.CustomSchemaIds(type => type.FullName);
-            }*/);
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Exams API",
+                    Version = "v1",
+                });
+
+            });
 
             builder.Services.AddScoped<AdminRepository>();
             builder.Services.AddScoped<AnswerRepository>();
@@ -47,24 +53,21 @@ namespace Exams_Application
 
             var app = builder.Build();
 
-            if (app.Environment.IsDevelopment())
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
             {
-                app.UseSwagger();
-                app.UseSwaggerUI(/*c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Exams API")*/);
-            }
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Exams API v1");
+            });
 
             app.UseHttpsRedirection();
 
-            app.UseAuthentication();//need to do auth
+            app.UseAuthentication(); // You need to configure authentication
             app.UseAuthorization();
 
             app.MapControllers();
             app.UseCors();
 
-
             app.Run();
-
-
         }
     }
 }

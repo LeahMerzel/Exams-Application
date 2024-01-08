@@ -9,15 +9,10 @@ namespace Exams_Application.Controllers
     [ApiController]
     public class AdminController : GenericController<Admin>
     {
-        private readonly AdminRepository adminRepository;
+        private readonly AdminRepository? adminRepository;
         public AdminController(AdminRepository adminRepository) :base(adminRepository) 
         {
         }
-        //use async Task<IActionResult>
-
-        //this is a controller to control all admins of app, if makes sense
-        //and admins have access to userAccounts controller and all other relavant controllers
-
        
 
     }

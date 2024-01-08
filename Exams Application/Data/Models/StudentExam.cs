@@ -10,10 +10,11 @@ namespace Exams_Application.Data.Models
         public int Grade { get; set; }
         public List<Question>? QuestionsFailed { get; set; }
         public Guid StudentId { get; set; }
-        public int ExamId { get; set; }
+        public Guid ExamId { get; set; }
 
         // Timing-related properties
         public DateTime ExamStartTime { get; set; }
+        [NotMapped]
         public System.Timers.Timer? ExamTimer { get; set; }
         public bool WasExamLoggedInToByStudent { get; set; }
         public int DurationInMinutes { get; set; } 

@@ -73,17 +73,29 @@ public class GenericController<T> : ControllerBase, IGenericController<T>
     }
     //maybe want to change following - there are lots of options as to how to implement method
     //also need to understand it better
+    [HttpGet("GetEntityId")]
     public Guid GetEntityId(T entity)
     {
-        var idProperty = entity?.GetType().GetProperty("Id");
-        var idValue = idProperty?.GetValue(entity);
+        if (entity == null)
+        {
+            throw new ArgumentNullException(nameof(entity));
+        }
+
+        var idProperty = entity.GetType().GetProperty("Id");
+
+        if (idProperty == null)
+        {
+            throw new InvalidOperationException($"Type {entity.GetType().Name} does not have a property named 'Id'.");
+        }
+
+        var idValue = idProperty.GetValue(entity);
 
         if (idValue is Guid guidValue)
         {
             return guidValue;
         }
 
-        throw new InvalidOperationException("Invalid or missing 'Id' property value.");
+        throw new InvalidOperationException($"Invalid or missing 'Id' property value. Actual type: {idValue?.GetType().Name}");
     }
 
 }
